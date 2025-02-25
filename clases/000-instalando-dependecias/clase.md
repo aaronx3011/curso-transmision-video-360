@@ -1,4 +1,4 @@
-# Validacion de instalacion
+# Validación de instalación
 En esta clase el objetivo principal es instalar los requerimientos que se encuentran en el archivo **README.md**
 
 ## Contenidos
