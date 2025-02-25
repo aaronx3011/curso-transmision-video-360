@@ -1,4 +1,4 @@
-# Instalacion de dependecias
+# Instalación de dependecias
 
 1. Actualizar listado de paquetes disponibles
 

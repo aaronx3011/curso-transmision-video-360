@@ -1,4 +1,4 @@
-# Tansmision de video 360
+# Tansmisión de video 360
 
 El objetivo de este repositorio es recopilar el conocimiento necesario para generar un video 360 utilizando FFmpeg Y GStreamer como herramientas claves para procesar el video.
 Recorreremos los conceptos básicos y como usar estas herramientas para generar el producto final que estamos esperando.
