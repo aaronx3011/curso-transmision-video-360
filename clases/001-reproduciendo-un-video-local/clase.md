@@ -45,7 +45,9 @@ En este caso nuestro video tiene estas características.
 
 ```
 `dives.mp4` *corresponde al nombre del archivo. (Se puede colocar cualquier nombre, lo importante es que el programa lo pueda encontrar, para eso recomendamos usar el path absoluto)*
+
 `mp4` *Corresponde al contenedor del video, que en este caso es mp4 (Si se desea utilizar otro es probable que los comandos de gstreamer cambien dependiendo de las características del video seleccionado)*
+
 `h264 (Main)` *Corresponde al codec que se esta usando en este video (Al igual que el contenedor en caso de cambiar el comando de gsteramer tambien se vera afectado)*
 
 *Los demas datos no son de importancia en este momento pero es en un futuro si los usaremos*
