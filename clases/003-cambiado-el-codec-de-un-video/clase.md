@@ -43,7 +43,7 @@ Para convertir el video es necesario abrir una terminal en la caperta donde se e
 #### FFMpeg
 
 ``` bash
-    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> -c:v <codec-que-vamos-a-usar> <path/al/video/nombre-del-archivo-mkv>
+    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> -c:v <codec-que-vamos-a-usar> <path/al/video/nombre-del-archivo-mp4>
 ```
 
 Con este comando lo que estamos haciendo es:
@@ -52,7 +52,7 @@ Con este comando lo que estamos haciendo es:
 2. `-i`: Este flag indica que a continuacion vamos a recibir un **Input**
 3. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde se encuentra el archivo que estamos marcando como input
 4. `-c:v`: Este flag esta segmentado en dos secciones importantes, la primera es el `-c` que nos indica que vamos a declarar un codec, la siguiente `:v` nos indica que este va a afectar unicamente al video
-5. `<path/al/video/nombre-del-archivo-mkv>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
+5. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
 
 Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
 
