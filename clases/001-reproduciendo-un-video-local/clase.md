@@ -89,14 +89,14 @@ Ademas veremos un resultado en nuestra terminal parecido al mostrado anteriormen
 A direfencia de FFMpeg en gsteramer es un poco mas complicado reproducir el video. *(Existen unas alternativas mas sencillas pero por fines educativos lo haremos con el siguiente comando)*
 
 ```bash
-    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo>' ! qtdemux ! h264parse ! nvh264dec ! videoconvert ! autovideosink
+    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! videoconvert ! autovideosink
 ```
 
 Aca lo que estamos haciendo es:
 
-1. `gst-launch-1.0`: Llamamos a gsteramer para poder usar sus funciones
-2. `filesrc location='<path/al/video/nombre-del-archivo>'`: Indicamos que la fuente de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo>"
-3. `qtdemux`: Demuxeamos el video para poder obtener unicamente el video
+1. `gst-launch-1.0`: Llamamos a GStreamer para poder usar sus funciones
+2. `filesrc location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la fuente de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
+3. `qtdemux`: Demuxeamos el video para poder obtener unicamente el flujo multimedia correspondiente al video
 4. `h264parse`: Ahora empezamos el proceso de descompresion
 5. `nvh264dec`: Aca ya estamos descomprimiendo el video en fragmentos separados para poder reproducirlo utilizando autovideosink
 6. `videoconvert`: Antes de poder reproducirlo vamos a usar este conversor, para que una vez que tengamos una salida en formato RAW del decoder, podamos transformarlo en lo que el reproductor necesita

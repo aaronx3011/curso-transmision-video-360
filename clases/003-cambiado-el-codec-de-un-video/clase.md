@@ -1,21 +1,16 @@
-# Cambiando un video de contenedor
-La idea de esta clase es cambiar un video de contenedor (convertir 'video.mp4' a 'video.mkv')
-El proceso es simple pero nos vamos a encontrar cosas muy interesantes
-Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las caracteristicas expuestas en el archivo **README.md**
+# Cambiando el codec de un video
+
+La idea de esta clase es cambiar el codec de un video, estaremos usando tres de los codecs mas usados en la industria audio visual, h264, h265 y vp9
+Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las características expuestas en el archivo **README.md**
 
 
 ## Contenidos
 
-### 1. Conceptos importantes
 
-- Parse
-    *El proceso denominado “parse” es un proceso que se realiza para disminuir el tamaño de los archivos de video, sabiendo que los videos están estructurados por frames el proceso de parse consiste en utilizar los frames anteriores para producir los siguientes y optimizar el espacio  que consume el video, esto se puede hacer gracias a los codecs, los cuales comprimen cada frame del video y lo separan en “secciones”.*
+### 1. Conversión del codec
 
-
-### 2. Conversión del video
-
-La idea de esta clase es cambiar un video de contenedor (convertir 'video.mp4' a 'video.mkv')
-Estaremos usando un video con las siguientes características
+El objetivo principal de esta clase es cambiar el codec de nuestro video y probar algunos de los codecs mas comerciales
+Para esto estaremos usando un video con las siguientes características
 
 ``` bash
     Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video.mp4':=    0B f=0/0   
@@ -48,16 +43,18 @@ Para convertir el video es necesario abrir una terminal en la caperta donde se e
 #### FFMpeg
 
 ``` bash
-    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> <path/al/video/nombre-del-archivo-mkv>
+    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> -c:v <codec-que-vamos-a-usar> <path/al/video/nombre-del-archivo-mp4>
 ```
 
-Con estes comando lo que estamos haciendo es:
+Con este comando lo que estamos haciendo es:
+
 1. `ffmpeg`: Llamamos a FFMpeg para poder usar sus funciones
 2. `-i`: Este flag indica que a continuacion vamos a recibir un **Input**
 3. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde se encuentra el archivo que estamos marcando como input
-4. `<path/al/video/nombre-del-archivo-mkv>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
+4. `-c:v`: Este flag esta segmentado en dos secciones importantes, la primera es el `-c` que nos indica que vamos a declarar un codec, la siguiente `:v` nos indica que este va a afectar unicamente al video
+5. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
 
-Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
+Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
 
 ```bash
     ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
@@ -136,23 +133,23 @@ Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso pued
     
 #### GStreamer
 
-A direfencia de FFMpeg en GStreamer es un poco mas complicado convertir el video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
+A direfencia de FFMpeg en GStreamer es un poco mas complicado cambiar el codec del video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
 
 ```bash
-    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh264enc ! h264parse ! matroskamux ! filesink location='<path/al/video/nombre-del-archivo-mkv>'
+    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh265enc ! h265parse ! qtmux ! filesink location='<path/al/video/nombre-del-archivo-mp4>'
 ```
 
 Con este comando lo que estamos haciendo es:
 
 1. `gst-launch-1.0`: Llamamos a GStreamer para poder usar sus funciones
-2. `filesrc location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la fuente de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
+2. `filesrc location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la fuente de este flujo, en este caso es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
 3. `qtdemux`: Demuxeamos el video para poder obtener unicamente el flujo multimedia correspondiente al video
 4. `h264parse`: Ahora empezamos el proceso de descompresion
 5. `nvh264dec`: Aca ya estamos descomprimiendo el video en fragmentos separados
-5. `nvh264enc`: Aca estamos comprimiendo el video para poder almacenarlo en el contenedor deseado
-7. `h264parse`: Ahora empezamos el proceso de "parseo" (analisis u ordenamiento)
-8. `matroskamux`: Muxeamos el video para poder empaquetarlo en el contenedor deseado
-9. `filesink location='<path/al/video/nombre-del-archivo-mkv>'`: Indicamos que la salida de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mkv>"
+5. `nvh265enc`: Aca estamos comprimiendo el video para poder almacenarlo en el contenedor deseado
+7. `h265parse`: Ahora empezamos el proceso de "parseo" (analisis u ordenamiento)
+8. `qtmux`: Muxeamos el video para poder empaquetarlo en el contenedor deseado
+9. `filesink location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la salida de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
 
 Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
 
