@@ -1,21 +1,23 @@
-# Cambiando un video de contenedor
-La idea de esta clase es cambiar un video de contenedor (convertir 'video.mp4' a 'video.mkv')
-El proceso es simple pero nos vamos a encontrar cosas muy interesantes
-Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las caracteristicas expuestas en el archivo **README.md**
+# Cambiando el codec de un video
+
+La idea de esta clase es cambiar el bitrate de un video. Con el objetivo de evidenciar la importancia del bitrate en la calidad percibida del video final
+Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las características expuestas en el archivo **README.md**
 
 
 ## Contenidos
 
-### 1. Conceptos importantes
+### 1. Conceptos 
 
-- **Parse**
-    *El proceso denominado “parse” es un proceso que se realiza para disminuir el tamaño de los archivos de video, sabiendo que los videos están estructurados por frames el proceso de parse consiste en utilizar los frames anteriores para producir los siguientes y optimizar el espacio  que consume el video, esto se puede hacer gracias a los codecs, los cuales comprimen cada frame del video y lo separan en “secciones”.*
+- **Bitrate**
+    El bitrate es la cantidad de información digital que se transmite por unidad de tiempo. Normalmente se mide en bits por segundo (bps) o megabits por segundo (Mbps)
+    El bitrate es un factor clave para determinar la calidad de la imagen y el sonido. Un bitrate más alto suele ofrecer una mejor calidad, pero el archivo será más grande
+    El bitrate se ve afectado por el tamanho de los frames, la densidad del color, la cantidad de frames por segundo, el codec, entre otros
 
 
-### 2. Conversión del video
+### 2. Cambio de bitrate
 
-La idea de esta clase es cambiar un video de contenedor (convertir 'video.mp4' a 'video.mkv')
-Estaremos usando un video con las siguientes características
+A continuacion estaremos haciendo cambio de bitrate de un video. Con el objetivo de evidenciar la importancia del bitrate en la calidad percibida del video final
+Para esto estaremos usando un video con las siguientes características
 
 ``` bash
     Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video.mp4':=    0B f=0/0   
@@ -48,16 +50,20 @@ Para convertir el video es necesario abrir una terminal en la caperta donde se e
 #### FFMpeg
 
 ``` bash
-    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> <path/al/video/nombre-del-archivo-mkv>
+    ffmpeg -i <path/al/video/nombre-del-archivo-mp4> -b:v <cantidad-de-birate><unidad-de-medida> <path/al/video/nombre-del-archivo-mp4>
 ```
 
-Con estes comando lo que estamos haciendo es:
+Con este comando lo que estamos haciendo es:
+
 1. `ffmpeg`: Llamamos a FFMpeg para poder usar sus funciones
 2. `-i`: Este flag indica que a continuacion vamos a recibir un **Input**
 3. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde se encuentra el archivo que estamos marcando como input
-4. `<path/al/video/nombre-del-archivo-mkv>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
+4. `-b:v`: Este flag esta segmentado en dos secciones importantes, la primera es el `-b` que nos indica que vamos a alterar el bitrate de un flujo multimedia, la siguiente `:v` nos indica que este va a afectar unicamente al video
+5. `<cantidad-de-birate>`: Debemos especificar la cantidad que querramos colocar se especifica con numeros enteros positivos, ejemplo, 10
+6. `<unidad-de-medida>`: Debemos especificar la unidad de medida que querramos utilizar lo mas comun es usar megabits o kilobits, ejemplo, M o K
+5. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
 
-Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
+Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
 
 ```bash
     ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
@@ -136,23 +142,23 @@ Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso pued
     
 #### GStreamer
 
-A direfencia de FFMpeg en GStreamer es un poco mas complicado convertir el video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
+A direfencia de FFMpeg en GStreamer es un poco mas complicado cambiar el bitrate del video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
 
 ```bash
-    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh264enc ! h264parse ! matroskamux ! filesink location='<path/al/video/nombre-del-archivo-mkv>'
+    gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh264enc bitrate=<cantidad-de-birate> ! h264parse ! qtmux ! filesink location='<path/al/video/nombre-del-archivo-mp4>'
 ```
 
 Con este comando lo que estamos haciendo es:
 
 1. `gst-launch-1.0`: Llamamos a GStreamer para poder usar sus funciones
-2. `filesrc location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la fuente de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
+2. `filesrc location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la fuente de este flujo, en este caso es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
 3. `qtdemux`: Demuxeamos el video para poder obtener unicamente el flujo multimedia correspondiente al video
 4. `h264parse`: Ahora empezamos el proceso de descompresion
 5. `nvh264dec`: Aca ya estamos descomprimiendo el video en fragmentos separados
-5. `nvh264enc`: Aca estamos comprimiendo el video para poder almacenarlo en el contenedor deseado
+5. `nvh264enc`: Aca estamos comprimiendo el video para poder almacenarlo en el contenedor deseado, sin embargo en esta ocasion, le vamos a agregar el bitrate que deseamos al proceso de codificacion, usando el parametro bitrate, el cual recibe numeros enteros positivos, ejemplo, 1000
 7. `h264parse`: Ahora empezamos el proceso de "parseo" (analisis u ordenamiento)
-8. `matroskamux`: Muxeamos el video para poder empaquetarlo en el contenedor deseado
-9. `filesink location='<path/al/video/nombre-del-archivo-mkv>'`: Indicamos que la salida de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mkv>"
+8. `qtmux`: Muxeamos el video para poder empaquetarlo en el contenedor deseado
+9. `filesink location='<path/al/video/nombre-del-archivo-mp4>'`: Indicamos que la salida de este flujo es un archivo y se encuentra en la ubicacion "<path/al/video/nombre-del-archivo-mp4>"
 
 Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
 
@@ -180,9 +186,7 @@ Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso pued
 
 ## Detalles importantes
 1. Tamaño del archivo:
-    Si nos fijamos en el resultado de los comandos que ejecutamos, nos devuelven un video. Este archivo de video tiene un peso diferente al original.
-    - En el caso de GStreamer el video es mucho mas pesado de lo que esperabamos, y esto tiene que ver con el **bitrate** (que es un concepto que profundizaremos en las siguientes clases). Como estamos cambiando el contenedor del archivo, haciendo un proceso de descompresion y luego compresion, el punto de partida de la compresion del video es un video sin formato o en *"RAW"*, este tipo de video tiene mucha mas informacion que el video comprimido, y como no estamos seleccionando el bitrate que queremos usar para este flujo multimedia, GStreamer toma la decision por nosotros y nos devuelve un video con un bitrate muy alto
-    - En el caso de FFMpeg pasa lo opuesto, el video que obtenemos es mas ligero, y la explicacion es muy parecida, sin embargo, por defecto FFMpeg nos da un bitrate mas limitado haciendo que el video final sea mas ligero
+    Si nos fijamos en el resultado de los comandos que ejecutamos, nos devuelven un video. Este archivo de video tiene un peso diferente al original, y este va a variar dependiendo de la cantidad de bitrate que le coloquemos
 
 #
 
