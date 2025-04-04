@@ -15,7 +15,7 @@ En esta clase el objetivo principal es reproducir un video local que cumpla con 
 
 - **[Codec](https://www.dacast.com/es/blog-es/que-es-un-codec-de-video/)**
 
-    *El codec es un algoritmo que se utiliza para comprimir y descomprimir archivos de video. Los codecs son esenciales para reducir el tamaño de los archivos de video, lo que facilita su almacenamiento, transmisión y reproducción. La compresión de video implica eliminar información redundante o menos perceptible del video original, lo que reduce su tamaño sin afectar significativamente la calidad visual. Al reproducir un video, el codec realiza el proceso inverso, descomprimiendo el archivo para que pueda ser visualizado. Existen diferentes tipos de codecs, cada uno con sus propias características en cuanto a calidad de imagen, eficiencia de compresión y complejidad computacional. Los codecs mas populares son [h.264](https://www.dacast.com/es/blog-es/que-es-un-codec-de-video/) y [h.265 (HEVC)](https://eems.mit.edu/wp-content/uploads/2014/06/H.265-HEVC-Tutorial-2014-ISCAS.pdf)* 
+    *El codec es un algoritmo que se utiliza para comprimir y descomprimir archivos de video. Los codecs son esenciales para reducir el tamaño de los archivos de video, lo que facilita su almacenamiento, transmisión y reproducción. La compresión de video implica eliminar información redundante o menos perceptible del video original, lo que reduce su tamaño sin afectar significativamente la calidad visual. Al reproducir un video, el codec realiza el proceso inverso, descomprimiendo el archivo para que pueda ser visualizado. Existen diferentes tipos de codecs, cada uno con sus propias características en cuanto a calidad de imagen, eficiencia de compresión y complejidad computacional. Los codecs más populares son [h.264](https://www.dacast.com/es/blog-es/que-es-un-codec-de-video/) y [h.265 (HEVC)](https://eems.mit.edu/wp-content/uploads/2014/06/H.265-HEVC-Tutorial-2014-ISCAS.pdf)* 
 
 
 ### 2. Reproducción del video
@@ -50,7 +50,7 @@ En este caso nuestro video tiene estas características.
 
 `h264 (Main)` *Corresponde al codec que se esta usando en este video (Al igual que el contenedor en caso de cambiar el comando de gsteramer tambien se vera afectado)*
 
-*Los demas datos no son de importancia en este momento pero es en un futuro si los usaremos*
+*Los demás datos no son de importancia en este momento pero es en un futuro si los usaremos*
 
 Para reproducir los videos es necesario abrir una terminal en la caperta donde se encuentra y utilizar los siguientes comandos
 
@@ -61,7 +61,7 @@ Para reproducir los videos es necesario abrir una terminal en la caperta donde s
 ```
 
 Ese comando nos abrira una nueva ventana en la cual se va a estar reproduciendo el video que seleccionamos en el comando.
-Ademas veremos un resultado en nuestra terminal parecido al mostrado anteriormente.
+Además veremos un resultado en nuestra terminal parecido al mostrado anteriormente.
 
 ```bash
     Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'dives.mp4':=    0B f=0/0   
@@ -86,9 +86,9 @@ Ademas veremos un resultado en nuestra terminal parecido al mostrado anteriormen
     
 #### GStreamer
 
-A direfencia de FFMpeg en gsteramer es un poco mas complicado reproducir el video. *(Existen unas alternativas mas sencillas pero por fines educativos lo haremos con el siguiente comando)*
+A direfencia de FFMpeg en gsteramer es un poco más complicado reproducir el video. *(Existen unas alternativas más sencillas pero por fines educativos lo haremos con el siguiente comando)*
 
-```bash
+```bashbitrate=<cantidad-de-birate>
     gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! videoconvert ! autovideosink
 ```
 
@@ -103,7 +103,7 @@ Aca lo que estamos haciendo es:
 7. `autovideosink`: Este es el paso final que nos permite reproducir el video
 
 Ese comando nos abrira una nueva ventana en la cual se va a estar reproduciendo el video que seleccionamos en el comando.
-Ademas veremos un resultado en nuestra terminal parecido al siguiente.
+Además veremos un resultado en nuestra terminal parecido al siguiente.
 
 
 ```bash

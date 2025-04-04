@@ -1,6 +1,6 @@
 # Cambiando el codec de un video
 
-La idea de esta clase es cambiar el codec de un video, estaremos usando tres de los codecs mas usados en la industria audio visual, h264, h265 y vp9
+La idea de esta clase es cambiar el codec de un video, estaremos usando tres de los codecs más usados en la industria audio visual, h264, h265 y vp9
 Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las características expuestas en el archivo **README.md**
 
 
@@ -9,7 +9,7 @@ Para llevar a cabo los ejercicios de esta clase requerimos de un video local que
 
 ### 1. Conversión del codec
 
-El objetivo principal de esta clase es cambiar el codec de nuestro video y probar algunos de los codecs mas comerciales
+El objetivo principal de esta clase es cambiar el codec de nuestro video y probar algunos de los codecs más comerciales
 Para esto estaremos usando un video con las siguientes características
 
 ``` bash
@@ -36,7 +36,7 @@ Para esto estaremos usando un video con las siguientes características
 
 `h264 (High)` *Corresponde al codec que se esta usando en este video (Al igual que el contenedor en caso de cambiar el comando de gsteramer tambien se vera afectado)*
 
-*Los demas datos no son de importancia en este momento pero es en un futuro si los usaremos*
+*Los demás datos no son de importancia en este momento pero es en un futuro si los usaremos*
 
 Para convertir el video es necesario abrir una terminal en la caperta donde se encuentra y utilizar los siguientes comandos
 
@@ -133,7 +133,7 @@ Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nues
     
 #### GStreamer
 
-A direfencia de FFMpeg en GStreamer es un poco mas complicado cambiar el codec del video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
+A direfencia de FFMpeg en GStreamer es un poco más complicado cambiar el codec del video. *(Existen unas alternativas más sencillas pero con fines educativos lo haremos con el siguiente comando)*
 
 ```bash
     gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh265enc ! h265parse ! qtmux ! filesink location='<path/al/video/nombre-del-archivo-mp4>'
@@ -178,8 +178,8 @@ Veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso pued
 ## Detalles importantes
 1. Tamaño del archivo:
     Si nos fijamos en el resultado de los comandos que ejecutamos, nos devuelven un video. Este archivo de video tiene un peso diferente al original.
-    - En el caso de GStreamer el video es mucho mas pesado de lo que esperabamos, y esto tiene que ver con el **bitrate** (que es un concepto que profundizaremos en las siguientes clases). Como estamos cambiando el contenedor del archivo, haciendo un proceso de descompresion y luego compresion, el punto de partida de la compresion del video es un video sin formato o en *"RAW"*, este tipo de video tiene mucha mas informacion que el video comprimido, y como no estamos seleccionando el bitrate que queremos usar para este flujo multimedia, GStreamer toma la decision por nosotros y nos devuelve un video con un bitrate muy alto
-    - En el caso de FFMpeg pasa lo opuesto, el video que obtenemos es mas ligero, y la explicacion es muy parecida, sin embargo, por defecto FFMpeg nos da un bitrate mas limitado haciendo que el video final sea mas ligero
+    - En el caso de GStreamer el video es mucho más pesado de lo que esperabamos, y esto tiene que ver con el **bitrate** (que es un concepto que profundizaremos en las siguientes clases). Como estamos cambiando el contenedor del archivo, haciendo un proceso de descompresion y luego compresion, el punto de partida de la compresion del video es un video sin formato o en *"RAW"*, este tipo de video tiene mucha más informacion que el video comprimido, y como no estamos seleccionando el bitrate que queremos usar para este flujo multimedia, GStreamer toma la decision por nosotros y nos devuelve un video con un bitrate muy alto
+    - En el caso de FFMpeg pasa lo opuesto, el video que obtenemos es más ligero, y la explicacion es muy parecida, sin embargo, por defecto FFMpeg nos da un bitrate más limitado haciendo que el video final sea más ligero
 
 #
 
