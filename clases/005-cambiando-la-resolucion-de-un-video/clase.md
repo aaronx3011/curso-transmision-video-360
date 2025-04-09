@@ -1,6 +1,6 @@
-# Cambiando el codec de un video
+# Cambiando la resolución de un video
 
-La idea de esta clase es cambiar el bitrate de un video. Con el objetivo de evidenciar la importancia del bitrate en la calidad percibida del video final
+La idea de esta clase es cambiar la resolución el bitrate de un video. Con el objetivo de evidenciar la importancia del bitrate en la calidad percibida del video final
 Para llevar a cabo los ejercicios de esta clase requerimos de un video local que cumpla con las características expuestas en el archivo **README.md**
 
 
@@ -55,7 +55,7 @@ Con este comando lo que estamos haciendo es:
 1. `ffmpeg`: Llamamos a FFMpeg para poder usar sus funciones
 2. `-i`: Este flag indica que a continuación vamos a recibir un **Input**
 3. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde se encuentra el archivo que estamos marcando como input
-4. `-vf`: Este flag le indica a FFMpeg que estamos a puntod de usar un filtro en el video, en este caso vamos a usar un filtro llamado "scale" para poder rescalar el video
+4. `-vf`: Este flag le indica a FFMpeg que estamos a punto de usar un filtro en el video, en este caso vamos a usar un filtro llamado "scale" para poder rescalar el video
 4. `scale`: Este filtro nos permite reescalar el video de manera sencilla.
 5. `<width>`: Corresponde a la cantidad de pixeles horizontales que va a tener nuestro video una vez que pase por el filtro.
 5. `<width>`: Corresponde a la cantidad de pixeles verticales que va a tener nuestro video una vez que pase por el filtro.

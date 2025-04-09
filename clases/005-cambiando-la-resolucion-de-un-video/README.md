@@ -1,5 +1,5 @@
 # Cambiando la resolución de un video
-La idea de esta clase es cambiar el resolución de un video.
+La idea de esta clase es cambiar la resolución de un video.
 
 ### Requisitos
 En esta clase estaremos usando un video con las siguientes características.
