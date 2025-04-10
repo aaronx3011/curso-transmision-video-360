@@ -32,7 +32,7 @@ Estas herramientas nos permiten realizar operaciones complejas que involucran m�
 ### 2. Mapeo de audio y video
 
 A continuación realizaremos el mapeo de un adio con un video, el objetivo es tener dos inputs de video diferentes y que en cada uno se genere el mismo audio asi mantendremos un video con el audio original y otro con el audio nuevo, el cual corresponde al primer video.
-Para esto estaremos usando un video con las siguientes características
+Para esto estaremos usando un par videos con las siguientes características
 
 ``` bash
 Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video.mp4':=    0B
@@ -56,7 +56,7 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video.mp4':=    0B
 ```
 
 ``` bash
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video.mp4':=    0B
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'video2.mp4':=    0B
   Metadata:
     major_brand     : isom
     minor_version   : 512
