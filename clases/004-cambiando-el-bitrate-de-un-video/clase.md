@@ -43,7 +43,7 @@ Para esto estaremos usando un video con las siguientes características
 
 `h264 (High)` *Corresponde al codec que se esta usando en este video (Al igual que el contenedor en caso de cambiar el comando de gsteramer tambien se vera afectado)*
 
-*Los demas datos no son de importancia en este momento pero es en un futuro si los usaremos*
+*Los demás datos no son de importancia en este momento pero es en un futuro si los usaremos*
 
 Para convertir el video es necesario abrir una terminal en la caperta donde se encuentra y utilizar los siguientes comandos
 
@@ -60,7 +60,7 @@ Con este comando lo que estamos haciendo es:
 3. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde se encuentra el archivo que estamos marcando como input
 4. `-b:v`: Este flag esta segmentado en dos secciones importantes, la primera es el `-b` que nos indica que vamos a alterar el bitrate de un flujo multimedia, la siguiente `:v` nos indica que este va a afectar unicamente al video
 5. `<cantidad-de-birate>`: Debemos especificar la cantidad que querramos colocar se especifica con numeros enteros positivos, ejemplo, 10
-6. `<unidad-de-medida>`: Debemos especificar la unidad de medida que querramos utilizar lo mas comun es usar megabits o kilobits, ejemplo, M o K
+6. `<unidad-de-medida>`: Debemos especificar la unidad de medida que querramos utilizar lo más comun es usar megabits o kilobits, ejemplo, M o K
 5. `<path/al/video/nombre-del-archivo-mp4>`: Indica donde vamos a guardar el archivo que estamos generando *Esto tambien se puede denominar como output*
 
 Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nuestra terminal parecido al siguiente *(Este proceso puede demorar un poco, dependiendo de la resolucion del video, la duracion del mismo, entre otros muchos factores)*
@@ -142,7 +142,7 @@ Asi empezamos el proceso de cambio de codec, seguido, veremos un proceso en nues
     
 #### GStreamer
 
-A direfencia de FFMpeg en GStreamer es un poco mas complicado cambiar el bitrate del video. *(Existen unas alternativas mas sencillas pero con fines educativos lo haremos con el siguiente comando)*
+A direfencia de FFMpeg en GStreamer es un poco más complicado cambiar el bitrate del video. *(Existen unas alternativas más sencillas pero con fines educativos lo haremos con el siguiente comando)*
 
 ```bash
     gst-launch-1.0 filesrc location='<path/al/video/nombre-del-archivo-mp4>' ! qtdemux ! h264parse ! nvh264dec ! nvh264enc bitrate=<cantidad-de-birate> ! h264parse ! qtmux ! filesink location='<path/al/video/nombre-del-archivo-mp4>'
